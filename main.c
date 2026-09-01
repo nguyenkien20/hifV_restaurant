@@ -322,15 +322,4 @@ void discount_manage(const role_t *pDiscount, int size)
 }
 void item_current()
 {
-    int item_index = 0;
-    printf("Enter the current item in restaurant still available: \n");
-    scanf("%d", &item_index);
-    int *pSeat = NULL;
-    pSeat = (int*)calloc(item_index, sizeof(int));
-    if(pSeat == NULL){
-        printf("Cant allocate memory!\n");
-    }
-
-    free(pSeat);
-    pSeat = NULL;
 }
