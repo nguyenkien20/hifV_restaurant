@@ -54,9 +54,10 @@ void menu_display(const role_t *pMenu, int size);
 void menu_choose(const role_t *pMenu, uint8_t choose_index);
 
 // ADMIN
-void adminPanel();                // (x) admin panel
+int adminPanel();                // (x) admin panel
 int admin_login(admin_t *pAdmin); // (x) create and revised account or password
 void admin_account_create();
+void admin_change_credentials();
 // CUSTOMER
 void customerPanel();
 void customer_login();

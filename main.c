@@ -41,20 +41,22 @@ int main()
 void main_board()
 {
     char role[10];
+    int get_value = 0;
+label_1:
     printf("---------------------------------\n");
     printf("Welcome to the Hiff-V restaurant!\n");
     printf("---------------------------------");
     printf("\nYou are??\n");
     printf("1. Admin (enter admin)\n");
     printf("2. Customer (enter customer)\n");
-    printf("3. Enter 3 to exit the program\n");
+    printf("3. Exit (enter exit) to end the program\n");
     do
     {
         printf("Enter your choice: \n");
         scanf("%s", role);
         if (strcmp(role, "admin") == 0)
         {
-            adminPanel();
+            get_value = adminPanel();
         }
         else if ((strcmp(role, "customer") == 0))
         {
@@ -64,25 +66,33 @@ void main_board()
         {
             printf("EXIT THE PROGRAM!!\n");
         }
-        if (strcmp(role, "admin") != 0 && strcmp(role, "customer") != 0 && strcmp(role, "3") != 0)
+        if (strcmp(role, "admin") != 0 && strcmp(role, "customer") != 0 && strcmp(role, "exit") != 0)
         {
             printf("please try again!!\n");
         }
-    } while (strcmp(role, "admin") != 0 && strcmp(role, "customer") != 0 && strcmp(role, "3") != 0);
+    } while (strcmp(role, "admin") != 0 && strcmp(role, "customer") != 0 && strcmp(role, "exit") != 0);
+    if (get_value == 1)
+    {
+        goto label_1;
+    }
+    else
+    {
+        printf("Exit the program!\n");
+    }
 }
 ///////////////////////////////////////////////////////////////////
-void adminPanel()
+int adminPanel()
 {
     int flag = 0;
     admin_t admin1; // max admin account is 10
     unsigned int choose1 = 0, choose2 = 0;
-    printf("\nThis is the admin panel!\n");
+    printf("\nWELCOME TO ADMIN PANEL!\n");
     printf("-----------------------------\n");
     printf("1.Sign in?\n");
     printf("2.Create a new admin account!\n");
     printf("3. Back to main board\n");
     printf("-----------------------------\n");
-    printf("enter your choice:\n");
+    printf("Enter your choice:\n");
     while (scanf("%u", &choose1) != 1 || choose1 < 1 || choose1 > 3) // nhap gia tri thanh cong ham scanf tra ve 1
     {
         printf("Must choose 1, 2 or 3!!\n");
@@ -99,13 +109,8 @@ void adminPanel()
     }
     else if (choose1 == 3)
     {
-        main_board();
+        return 1;
     }
-    else
-    {
-        printf("Must choose 1, 2 or 3!!\n");
-    }
-
     if (flag == 1)
     {
         printf("------ADMIN MENU------\n");
@@ -117,7 +122,7 @@ void adminPanel()
         printf("----------------------\n");
         // chosing
         printf("Enter a number: \n");
-        while (scanf("%d", &choose2) != 1 || choose2 < 1 || choose2 > ADMIN_MENU)
+        while (scanf("%u", &choose2) != 1 || choose2 < 1 || choose2 > ADMIN_MENU)
         {
             printf("Please enter value form %d to %d\n", 1, ADMIN_MENU);
             while (getchar() != '\n')
@@ -156,7 +161,7 @@ void customerPanel()
     printf("3. Exit to home page\n");
     printf("--------------------------\n");
     printf("Enter your choice:\n");
-    while (scanf("%d", &choose1) != 1 || choose1 < 1 || choose1 > 3)
+    while (scanf("%u", &choose1) != 1 || choose1 < 1 || choose1 > 3)
     {
         printf("Please enter value form 1 to 3!!: \n");
         while (getchar() != '\n')
@@ -186,6 +191,7 @@ void customerPanel()
     }
 }
 ///////////////////////////////////////////////////////////////////
+// SHOULD CHANGE RETURN TYPE OF item_add to void ();
 void item_add(item_t *pAdd)
 {
     int quantity = 0;
@@ -205,7 +211,7 @@ void item_add(item_t *pAdd)
     printf("\nSTT\tID\tNAME\tPRICE\tQUANTITY\n");
     for (int i = 0; i < quantity; i++)
     {
-        printf("%d\t%s\t%s\t%.2lf\t%d\n", i + 1, *((pAdd + i)->id), *((pAdd + i)->name), ((pAdd + i)->price), ((pAdd + i)->quantity));
+        printf("%d\t%s\t%s\t%.2lf\t%d\n", i + 1, ((pAdd + i)->id), ((pAdd + i)->name), ((pAdd + i)->price), ((pAdd + i)->quantity));
     }
 }
 void inventory_display()
@@ -228,7 +234,6 @@ int admin_login(admin_t *pAdmin)
     scanf("%s", (pAdmin)->password);
     flag = 1; // mean login successful
     return flag;
-    // item_add(items); // test function
 }
 void customer_login()
 {
@@ -335,4 +340,9 @@ void discount_manage(const role_t *pDiscount, int size)
 }
 void item_current()
 {
+}
+
+void admin_change_credentials()
+{
+
 }

@@ -1,0 +1,22 @@
+# ignore execute file
+*.exe
+*.out
+*.app
+
+# ignore object file
+*.o
+*.obj
+
+# ignore build up file (IDE)
+.vs/
+Debug/
+Release/
+bin/
+obj/
+
+# ignore config file
+.vscode/
+
+# ignore temp file
+.DS_Store
+Thumbs.db
