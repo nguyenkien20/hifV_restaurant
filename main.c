@@ -4,6 +4,7 @@
 #include <time.h> // time for check in check out
 #include "admin.h"
 
+#define ADMIN_MENU 5
 #define INVENTORY_SIZE (sizeof(inventory_manage_admin) / sizeof(inventory_manage_admin[0]))
 #define CUSTOMER_SIZE (sizeof(customer_manage_admin) / sizeof(customer_manage_admin[0]))
 #define DISCOUNT_SIZE (sizeof(discount_manage_admin) / sizeof(discount_manage_admin[0]))
@@ -33,6 +34,7 @@ const role_t customer_view[6] = {{"Reserved my table", reserve_table},
 
 int main()
 {
+    // call to main board function
     main_board();
     return 0;
 }
@@ -74,48 +76,54 @@ void adminPanel()
     int flag = 0;
     admin_t admin1; // max admin account is 10
     unsigned int choose1 = 0, choose2 = 0;
-    printf("--------------------------");
     printf("\nThis is the admin panel!\n");
-    printf("--------------------------\n");
-    printf("\n1.Sign in?\n");
+    printf("-----------------------------\n");
+    printf("1.Sign in?\n");
     printf("2.Create a new admin account!\n");
     printf("3. Back to main board\n");
-    do
+    printf("-----------------------------\n");
+    printf("enter your choice:\n");
+    while (scanf("%u", &choose1) != 1 || choose1 < 1 || choose1 > 3) // nhap gia tri thanh cong ham scanf tra ve 1
     {
-        printf("enter your choice:\n");
-        scanf("%u", &choose1);
-        if (choose1 == 1)
-        {
-            flag = admin_login(&admin1);
-            break;
-        }
-        else if (choose1 == 2)
-        {
-            admin_account_create();
-        }
-        else if (choose1 == 3)
-        {
-            main_board();
-        }
-        else
-        {
-            printf("Must choose 1, 2 or 3!!\n");
-        }
-    } while (choose1 < 1 || choose1 > 3);
+        printf("Must choose 1, 2 or 3!!\n");
+        while (getchar() != '\n')
+            ;
+    }
+    if (choose1 == 1)
+    {
+        flag = admin_login(&admin1);
+    }
+    else if (choose1 == 2)
+    {
+        admin_account_create();
+    }
+    else if (choose1 == 3)
+    {
+        main_board();
+    }
+    else
+    {
+        printf("Must choose 1, 2 or 3!!\n");
+    }
+
     if (flag == 1)
     {
         printf("------ADMIN MENU------\n");
         printf("1. Manage inventory!\n");
-        // void inventory_manage();
         printf("2. Manage customers!\n");
-        // void customer_manage();
         printf("3. Manage discount!\n");
-        // void discount_manage();
         printf("4. Change admin credentials!\n");
         printf("5. Exit admin menu\n");
-        // void main_board(); // return to main board
-        printf("Make your choice !\n");
-        scanf("%d", &choose2);
+        printf("----------------------\n");
+        // chosing
+        printf("Enter a number: \n");
+        while (scanf("%d", &choose2) != 1 || choose2 < 1 || choose2 > ADMIN_MENU)
+        {
+            printf("Please enter value form %d to %d\n", 1, ADMIN_MENU);
+            while (getchar() != '\n')
+                ;
+        }
+        // handle user enter out of range
     }
     switch (choose2)
     {
@@ -140,37 +148,42 @@ void adminPanel()
 ///////////////////////////////////////////////////////////////////
 void customerPanel()
 {
-    unsigned int choose1 = 0, choose2 = 0;
-    printf("--------------------------");
-    printf("\nThis is the customer panel!\n");
+    unsigned int choose1 = 0;
+    printf("\nWELCOME TO CUSTOMER PANEL!\n");
     printf("--------------------------\n");
     printf("1.Sign in?\n");
     printf("2.Create a new customer account!\n");
     printf("3. Exit to home page\n");
-    do
+    printf("--------------------------\n");
+    printf("Enter your choice:\n");
+    while (scanf("%d", &choose1) != 1 || choose1 < 1 || choose1 > 3)
     {
-        printf("enter your choice:\n");
-        scanf("%u", &choose1);
-        if (choose1 == 1)
-        {
-            customer_login();
-            break;
-        }
-        else if (choose1 == 2)
-        {
-            customer_create_account();
-        }
-        else if (choose1 == 3)
-        {
-            // main_board();
-        }
-        else
-        {
-            printf("Must choose 1, 2 or 3!!\n");
-        }
-    } while (choose1 < 1 || choose1 > 3);
-    printf("Login succesfully!!!\n");
-    menu_display(customer_view, CUSTOMER_PANEL);
+        printf("Please enter value form 1 to 3!!: \n");
+        while (getchar() != '\n')
+            ;
+    }
+    if (choose1 == 1)
+    {
+        customer_login();
+    }
+    else if (choose1 == 2)
+    {
+        customer_create_account();
+    }
+    else if (choose1 == 3)
+    {
+        ; // do nothing
+    }
+    // main_board();
+    if (choose1 == 1)
+    {
+        printf("Login succesfully!!!\n");
+        menu_display(customer_view, CUSTOMER_PANEL);
+    }
+    else
+    {
+        printf("EXIT THE PROGRAM\n");
+    }
 }
 ///////////////////////////////////////////////////////////////////
 void item_add(item_t *pAdd)
