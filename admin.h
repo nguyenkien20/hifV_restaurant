@@ -9,11 +9,20 @@
 #define MAX_NAME 50
 #define MAX_TABLE 20
 
-
 typedef struct Admin admin_t;
 typedef struct Item item_t;
 typedef struct Customer customer_t;
 typedef struct RolePanel role_t;
+typedef enum state state_t;
+
+enum state
+{
+    STATE_HOME,       // 0     // main_board
+    STATE_ADMIN,      // 1     // admin_panel
+    STATE_ADMIN_MENU, // 2     // admin_menu_panel
+    STATE_CUSTOMER,   // 3     // customer_panel
+    STATE_EXIT,       // 4     // exit the program
+};
 
 struct RolePanel
 {
@@ -44,22 +53,23 @@ struct Customer
 };
 struct Discount
 {
-    customer_t guest; //discount add depend on guest.id
+    customer_t guest; // discount add depend on guest.id
     double percent;
 };
-void main_board(); // x
+state_t main_board(); // x
 
 // for function pointer replace switch
 void menu_display(const role_t *pMenu, int size);
 void menu_choose(const role_t *pMenu, uint8_t choose_index);
 
 // ADMIN
-int adminPanel();                // (x) admin panel
-int admin_login(admin_t *pAdmin); // (x) create and revised account or password
+state_t adminPanel();                 // (x) admin panel
+void admin_login(admin_t *pAdmin); // (x) create and revised account or password
+state_t admin_menu_panel();
 void admin_account_create();
 void admin_change_credentials();
 // CUSTOMER
-void customerPanel();
+state_t customerPanel();
 void customer_login();
 void customer_create_account();
 // CUSTOMER CONTROLLER
@@ -71,9 +81,9 @@ void customer_menu_display();
 void view_available_tables();
 // ADMIN CONTROLLER
 //  main function inventory
-void inventory_manage(const role_t *pInventory, int size);     //////////
-void inventory_display();    // x
-void item_add(item_t *pAdd); // x
+void inventory_manage(const role_t *pInventory, int size); //////////
+void inventory_display();                                  // x
+void item_add(item_t *pAdd);                               // x
 void item_update();
 void item_remove();
 // customer manage main function
@@ -88,6 +98,7 @@ void discount_add();
 void discount_remove();
 void discount_display();
 // record
-void meal_record(); ///////////////
+void meal_record();  ///////////////
 void item_current(); //////////
+
 #endif
