@@ -368,6 +368,7 @@ state_t admin_menu_panel()
 state_t customer_menu_panel()
 {
     int lua_chon = 0;
+    
 }
 
 void meal_record(){
