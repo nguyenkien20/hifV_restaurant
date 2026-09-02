@@ -17,17 +17,18 @@ typedef enum state state_t;
 
 enum state
 {
-    STATE_HOME,       // 0     // main_board
-    STATE_ADMIN,      // 1     // admin_panel
-    STATE_ADMIN_MENU, // 2     // admin_menu_panel
-    STATE_CUSTOMER,   // 3     // customer_panel
-    STATE_EXIT,       // 4     // exit the program
+    STATE_HOME,             // 0     // main_board
+    STATE_ADMIN,            // 1     // admin_panel
+    STATE_ADMIN_MENU,       // 2     // admin_menu_panel
+    STATE_CUSTOMER,         // 3     // customer_panel
+    STATE_CUSTOMER_MENU,    // 4     // customer_menu_panel
+    STATE_EXIT,             // 5     // exit the program
 };
 
 struct RolePanel
 {
     const char *label; // function name
-    void (*handler)(); // function pointer
+    void (*handler)(void); // function pointer
 };
 
 struct Admin
@@ -66,11 +67,12 @@ void menu_choose(const role_t *pMenu, uint8_t choose_index);
 state_t adminPanel();                 // (x) admin panel
 void admin_login(admin_t *pAdmin); // (x) create and revised account or password
 state_t admin_menu_panel();
-void admin_account_create();
+void admin_create_account();
 void admin_change_credentials();
 // CUSTOMER
 state_t customerPanel();
 void customer_login();
+state_t customer_menu_panel();
 void customer_create_account();
 // CUSTOMER CONTROLLER
 void reserve_table();

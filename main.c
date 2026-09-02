@@ -34,59 +34,75 @@ const role_t customer_view[6] = {{"Reserved my table", reserve_table},
 
 int main()
 {
-    // call to main board function
-    main_board();
+    state_t state = STATE_HOME; // state = 0; meaning the program in main home
+
+    while (state != STATE_EXIT)
+    {
+        switch (state)
+        {
+        case STATE_HOME:
+            state = main_board(); // state receive value from main_board
+            break;
+        case STATE_ADMIN:
+            state = adminPanel();
+            break;
+        case STATE_ADMIN_MENU:
+            state = admin_menu_panel();
+            break;
+        case STATE_CUSTOMER:
+            state = customerPanel();
+            break;
+        case STATE_CUSTOMER_MENU:
+            state = customer_menu_panel();
+        default:
+            state = STATE_EXIT;
+            break;
+        }
+    }
+    printf("Exit the program!\n");
     return 0;
 }
-void main_board()
+state_t main_board()
 {
-    char role[10];
+    char role[MAX_CHAR];
     int get_value = 0;
 label_1:
     printf("---------------------------------\n");
-    printf("Welcome to the Hiff-V restaurant!\n");
+    printf("Welcome to the HifV restaurant!\n");
     printf("---------------------------------");
     printf("\nYou are??\n");
     printf("1. Admin (enter admin)\n");
     printf("2. Customer (enter customer)\n");
     printf("3. Exit (enter exit) to end the program\n");
-    do
+    printf("Enter your choice: \n");
+    scanf("%10s", role);
+    if (strcmp(role, "admin") == 0)
     {
-        printf("Enter your choice: \n");
-        scanf("%s", role);
-        if (strcmp(role, "admin") == 0)
-        {
-            get_value = adminPanel();
-        }
-        else if ((strcmp(role, "customer") == 0))
-        {
-            customerPanel();
-        }
-        else if (strcmp(role, "3") == 0)
-        {
-            printf("EXIT THE PROGRAM!!\n");
-        }
-        if (strcmp(role, "admin") != 0 && strcmp(role, "customer") != 0 && strcmp(role, "exit") != 0)
-        {
-            printf("please try again!!\n");
-        }
-    } while (strcmp(role, "admin") != 0 && strcmp(role, "customer") != 0 && strcmp(role, "exit") != 0);
-    if (get_value == 1)
+        return STATE_ADMIN;
+    }
+    else if ((strcmp(role, "customer") == 0))
     {
-        goto label_1;
+        return STATE_CUSTOMER;
+    }
+    else if (strcmp(role, "exit") == 0)
+    {
+        return STATE_EXIT;
     }
     else
     {
-        printf("Exit the program!\n");
+        printf("---------------------------------");
+        printf("---PLEASE TRY AGAIN AND AGAIN!---\n");
+        printf("---------------------------------");
+        return STATE_HOME;
     }
 }
 ///////////////////////////////////////////////////////////////////
-int adminPanel()
+state_t adminPanel()
 {
-    int flag = 0;
     admin_t admin1; // max admin account is 10
     unsigned int choose1 = 0, choose2 = 0;
-    printf("\nWELCOME TO ADMIN PANEL!\n");
+    printf("\n-----------------------------\n");
+    printf("----WELCOME TO ADMIN PANEL!----\n");
     printf("-----------------------------\n");
     printf("1.Sign in?\n");
     printf("2.Create a new admin account!\n");
@@ -101,57 +117,29 @@ int adminPanel()
     }
     if (choose1 == 1)
     {
-        flag = admin_login(&admin1);
+        admin_login(&admin1);
+        return STATE_ADMIN_MENU;
     }
     else if (choose1 == 2)
     {
-        admin_account_create();
+        admin_create_account();
+        return STATE_ADMIN;
     }
     else if (choose1 == 3)
     {
-        return 1;
+        return STATE_HOME;
     }
-    if (flag == 1)
+    else
     {
-        printf("------ADMIN MENU------\n");
-        printf("1. Manage inventory!\n");
-        printf("2. Manage customers!\n");
-        printf("3. Manage discount!\n");
-        printf("4. Change admin credentials!\n");
-        printf("5. Exit admin menu\n");
-        printf("----------------------\n");
-        // chosing
-        printf("Enter a number: \n");
-        while (scanf("%u", &choose2) != 1 || choose2 < 1 || choose2 > ADMIN_MENU)
-        {
-            printf("Please enter value form %d to %d\n", 1, ADMIN_MENU);
-            while (getchar() != '\n')
-                ;
-        }
-        // handle user enter out of range
-    }
-    switch (choose2)
-    {
-    case 1:
-        inventory_manage(inventory_manage_admin, INVENTORY_SIZE);
-        break;
-    case 2:
-        customer_manage(customer_manage_admin, CUSTOMER_SIZE);
-        break;
-    case 3:
-        discount_manage(discount_manage_admin, DISCOUNT_SIZE);
-        break;
-    case 4:
-        admin_login(&admin1);
-        break;
-    default:
-        printf("Exit the program\n");
-        break;
+        printf("---------------------------------");
+        printf("---PLEASE TRY AGAIN AND AGAIN!---\n");
+        printf("---------------------------------");
+        return STATE_ADMIN;
     }
 }
 // customer ///
 ///////////////////////////////////////////////////////////////////
-void customerPanel()
+state_t customerPanel()
 {
     unsigned int choose1 = 0;
     printf("\nWELCOME TO CUSTOMER PANEL!\n");
@@ -177,18 +165,14 @@ void customerPanel()
     }
     else if (choose1 == 3)
     {
-        ; // do nothing
+        return STATE_HOME;
     }
-    // main_board();
-    if (choose1 == 1)
+    if (choose1 == 1 || choose1 == 2)
     {
         printf("Login succesfully!!!\n");
         menu_display(customer_view, CUSTOMER_PANEL);
     }
-    else
-    {
-        printf("EXIT THE PROGRAM\n");
-    }
+    // return 
 }
 ///////////////////////////////////////////////////////////////////
 // SHOULD CHANGE RETURN TYPE OF item_add to void ();
@@ -200,9 +184,9 @@ void item_add(item_t *pAdd)
     for (int i = 0; i < quantity; i++)
     {
         printf("Enter item %d's id: \n", i + 1);
-        scanf("%s", (pAdd + i)->id);
+        scanf("%19s", (pAdd + i)->id);
         printf("Enter item %d's name: \n", i + 1);
-        scanf("%s", (pAdd + i)->name);
+        scanf("%49s", (pAdd + i)->name);
         printf("Enter item %d's price: \n", i + 1);
         scanf("%lf", &((pAdd + i)->price));
         printf("Enter item %d's quantity: \n", i + 1);
@@ -220,7 +204,7 @@ void inventory_display()
     printf("Those item in store is:\n");
 }
 
-int admin_login(admin_t *pAdmin)
+void admin_login(admin_t *pAdmin)
 {
     int flag = 0;
     item_t items[100]; // list maximum 100 items
@@ -229,9 +213,9 @@ int admin_login(admin_t *pAdmin)
     printf("enter admin username:\n");
     // fgets(username, sizeof(username), stdin); co the su dung de nhap chuoi
     // username[ strcspn( username, "\n" ) ] = '\0';
-    scanf("%s", (pAdmin)->username);
+    scanf("%49s", (pAdmin)->username);
     printf("enter admin password:\n");
-    scanf("%s", (pAdmin)->password);
+    scanf("%49s", (pAdmin)->password);
     flag = 1; // mean login successful
     return flag;
 }
@@ -242,7 +226,7 @@ void customer_login()
     printf("enter customer password:\n");
 }
 
-void admin_account_create()
+void admin_create_account()
 {
     printf("enter an admin account name: \n");
     printf("enter a password\n");
@@ -344,5 +328,48 @@ void item_current()
 
 void admin_change_credentials()
 {
+    printf("please enter old account");
+    printf("please enter old password");
+    printf("please enter new password");
+}
+state_t admin_menu_panel()
+{
+    int choose = 0;
+    printf("--ADMIN MENU PANEL--\n");
+    printf("1. Manage inventory!\n");
+    printf("2. Manage customers!\n");
+    printf("3. Manage discount!\n");
+    printf("4. Change admin credentials!\n");
+    printf("5. Exit admin menu\n");
+    printf("----------------------\n");
+
+    printf("enter 5 to exit admin menu:\n");
+    scanf("%d", &choose);
+    switch (choose)
+    {
+    case 1:
+        inventory_manage(inventory_manage_admin, INVENTORY_SIZE);
+        break;
+    case 2:
+        customer_manage(customer_manage_admin, CUSTOMER_SIZE);
+        break;
+    case 3:
+        discount_manage(discount_manage_admin, DISCOUNT_SIZE);
+        break;
+    case 4:
+        // admin_login(&admin1);
+        break;
+    default:
+        printf("Exit the program\n");
+        return STATE_ADMIN;
+        break;
+    }
+}
+state_t customer_menu_panel()
+{
+    int lua_chon = 0;
+}
+
+void meal_record(){
 
 }
