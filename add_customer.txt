@@ -85,3 +85,11 @@
 4. CUSTOMER PHONENUMBER: 6
 5. QUANTITY: 8
 --------------------------------
+
+-------THIS IS CUSTOMER/4/-------
+1. ID_TABLE: 0
+2. ID_CUSTOMER: f
+3. CUSTOMER NAME: f
+4. CUSTOMER PHONENUMBER: d
+5. QUANTITY: 4
+--------------------------------
