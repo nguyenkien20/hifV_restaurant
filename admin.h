@@ -8,6 +8,7 @@
 #define MAX_CHAR 20
 #define MAX_NAME 50
 #define MAX_TABLE 20
+#define MAX_CUSTOMER 100
 
 typedef struct Admin admin_t;
 typedef struct Item item_t;
@@ -65,7 +66,7 @@ void menu_choose(const role_t *pMenu, uint8_t choose_index);
 
 // ADMIN
 state_t adminPanel();                 // (x) admin panel
-void admin_login(admin_t *pAdmin); // (x) create and revised account or password
+void admin_login(); // (x) create and revised account or password
 state_t admin_menu_panel();
 void admin_create_account();
 void admin_change_credentials();
@@ -85,7 +86,7 @@ void view_available_tables();
 //  main function inventory
 void inventory_manage(const role_t *pInventory, int size); //////////
 void inventory_display();                                  // x
-void item_add(item_t *pAdd);                               // x
+void item_add();                               // x
 void item_update();
 void item_remove();
 // customer manage main function

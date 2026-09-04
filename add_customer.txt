@@ -1,0 +1,87 @@
+-----THIS IS CUSTOMER/6/-----
+1. ID_TABLE: 5
+2. ID_CUSTOMER: 012CUS
+3. CUSTOMER NAME: kiennguyen
+4. CUSTOMER PHONENUMBER: 0359111834
+5. QUANTITY: 6
+--------------------------------
+
+-----THIS IS CUSTOMER/5/-----
+1. ID_TABLE: 0
+2. ID_CUSTOMER: 
+3. CUSTOMER NAME: 
+4. CUSTOMER PHONENUMBER: 
+5. QUANTITY: 0
+--------------------------------
+
+-----THIS IS CUSTOMER/4/-----
+1. ID_TABLE: 6
+2. ID_CUSTOMER: rrere
+3. CUSTOMER NAME: kien
+4. CUSTOMER PHONENUMBER: 43
+5. QUANTITY: 3
+--------------------------------
+
+-----THIS IS CUSTOMER/3/-----
+1. ID_TABLE: 4
+2. ID_CUSTOMER: 55
+3. CUSTOMER NAME: t
+4. CUSTOMER PHONENUMBER: 5
+5. QUANTITY: 6
+--------------------------------
+
+-----THIS IS CUSTOMER/5/-----
+1. ID_TABLE: 0
+2. ID_CUSTOMER: t
+3. CUSTOMER NAME: r
+4. CUSTOMER PHONENUMBER: e
+5. QUANTITY: 5
+--------------------------------
+
+-----THIS IS CUSTOMER/5/-----
+1. ID_TABLE: 4
+2. ID_CUSTOMER: 2
+3. CUSTOMER NAME: 3
+4. CUSTOMER PHONENUMBER: 4
+5. QUANTITY: 3
+--------------------------------
+
+-----THIS IS CUSTOMER/4/-----
+1. ID_TABLE: 5
+2. ID_CUSTOMER: 4
+3. CUSTOMER NAME: t
+4. CUSTOMER PHONENUMBER: 5
+5. QUANTITY: 4
+--------------------------------
+
+-----THIS IS CUSTOMER/3/-----
+1. ID_TABLE: 4
+2. ID_CUSTOMER: 5f
+3. CUSTOMER NAME: r
+4. CUSTOMER PHONENUMBER: 5
+5. QUANTITY: 4
+--------------------------------
+
+-----THIS IS CUSTOMER/98/-----
+1. ID_TABLE: 1
+2. ID_CUSTOMER: 03
+3. CUSTOMER NAME: kien
+4. CUSTOMER PHONENUMBER: 0359111834
+5. QUANTITY: 9
+--------------------------------
+
+-----THIS IS CUSTOMER/4/-----
+1. ID_TABLE: 5
+2. ID_CUSTOMER: g
+3. CUSTOMER NAME: t
+4. CUSTOMER PHONENUMBER: 5
+5. QUANTITY: 4
+--------------------------------
+
+-----THIS IS CUSTOMER/5/-----
+1. ID_TABLE: 6
+2. ID_CUSTOMER: 75
+3. CUSTOMER NAME: yh
+4. CUSTOMER PHONENUMBER: 6
+5. QUANTITY: 8
+--------------------------------

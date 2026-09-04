@@ -106,7 +106,7 @@ state_t adminPanel()
     printf("-----------------------------\n");
     printf("1.Sign in?\n");
     printf("2.Create a new admin account!\n");
-    printf("3. Back to main board\n");
+    printf("3.Back to main board\n");
     printf("-----------------------------\n");
     printf("Enter your choice:\n");
     while (scanf("%u", &choose1) != 1 || choose1 < 1 || choose1 > 3) // nhap gia tri thanh cong ham scanf tra ve 1
@@ -117,7 +117,7 @@ state_t adminPanel()
     }
     if (choose1 == 1)
     {
-        admin_login(&admin1);
+        admin_login();
         return STATE_ADMIN_MENU;
     }
     else if (choose1 == 2)
@@ -158,25 +158,23 @@ state_t customerPanel()
     if (choose1 == 1)
     {
         customer_login();
+        printf("Login succesfully!!!\n");
+        return STATE_CUSTOMER_MENU;
     }
     else if (choose1 == 2)
     {
         customer_create_account();
+        return STATE_CUSTOMER;
     }
     else if (choose1 == 3)
     {
         return STATE_HOME;
     }
-    if (choose1 == 1 || choose1 == 2)
-    {
-        printf("Login succesfully!!!\n");
-        menu_display(customer_view, CUSTOMER_PANEL);
-    }
-    // return 
+    // return
 }
 ///////////////////////////////////////////////////////////////////
 // SHOULD CHANGE RETURN TYPE OF item_add to void ();
-void item_add(item_t *pAdd)
+void item_add()
 {
     int quantity = 0;
     printf("Enter a item's number to store:\n");
@@ -184,19 +182,19 @@ void item_add(item_t *pAdd)
     for (int i = 0; i < quantity; i++)
     {
         printf("Enter item %d's id: \n", i + 1);
-        scanf("%19s", (pAdd + i)->id);
+        // scanf("%19s", (pAdd + i)->id);
         printf("Enter item %d's name: \n", i + 1);
-        scanf("%49s", (pAdd + i)->name);
+        // scanf("%49s", (pAdd + i)->name);
         printf("Enter item %d's price: \n", i + 1);
-        scanf("%lf", &((pAdd + i)->price));
+        // scanf("%lf", &((pAdd + i)->price));
         printf("Enter item %d's quantity: \n", i + 1);
-        scanf("%d", &((pAdd + i)->quantity));
+        // scanf("%d", &((pAdd + i)->quantity));
     }
-    printf("\nSTT\tID\tNAME\tPRICE\tQUANTITY\n");
-    for (int i = 0; i < quantity; i++)
-    {
-        printf("%d\t%s\t%s\t%.2lf\t%d\n", i + 1, ((pAdd + i)->id), ((pAdd + i)->name), ((pAdd + i)->price), ((pAdd + i)->quantity));
-    }
+    // printf("\nSTT\tID\tNAME\tPRICE\tQUANTITY\n");
+    // for (int i = 0; i < quantity; i++)
+    // {
+    //     printf("%d\t%s\t%s\t%.2lf\t%d\n", i + 1, ((pAdd + i)->id), ((pAdd + i)->name), ((pAdd + i)->price), ((pAdd + i)->quantity));
+    // }
 }
 void inventory_display()
 {
@@ -204,7 +202,7 @@ void inventory_display()
     printf("Those item in store is:\n");
 }
 
-void admin_login(admin_t *pAdmin)
+void admin_login()
 {
     int flag = 0;
     item_t items[100]; // list maximum 100 items
@@ -213,11 +211,9 @@ void admin_login(admin_t *pAdmin)
     printf("enter admin username:\n");
     // fgets(username, sizeof(username), stdin); co the su dung de nhap chuoi
     // username[ strcspn( username, "\n" ) ] = '\0';
-    scanf("%49s", (pAdmin)->username);
+    // scanf("%49s", (pAdmin)->username);
     printf("enter admin password:\n");
-    scanf("%49s", (pAdmin)->password);
-    flag = 1; // mean login successful
-    return flag;
+    // scanf("%49s", (pAdmin)->password);
 }
 void customer_login()
 {
@@ -368,9 +364,28 @@ state_t admin_menu_panel()
 state_t customer_menu_panel()
 {
     int lua_chon = 0;
-    
+    while (1)
+    {
+        menu_display(customer_view, CUSTOMER_PANEL);
+
+        printf("Exit or continues the program in customer view?\n");
+        printf("enter 1 to stay, 0 to exit: \n");
+        while (scanf("%d", &lua_chon) != 1 || lua_chon < 0 || lua_chon > 1)
+        {
+            printf("ENTER 0 OR 1 NIGGA\n");
+            while (getchar() != '\n')
+                ;
+        }
+        if (lua_chon == 0) // exit
+        {
+            return STATE_CUSTOMER;
+        }
+        // lua_chon = 1 
+        // still inside while loop 
+    }
 }
 
-void meal_record(){
-
+void meal_record()
+{
+    
 }
