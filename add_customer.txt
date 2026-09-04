@@ -1,43 +1,8 @@
------THIS IS CUSTOMER/4/-----
-1. ID_TABLE: 5
-2. ID_CUSTOMER: 5333
-3. CUSTOMER NAME: keinn
-4. CUSTOMER PHONENUMBER: 4543
-5. QUANTITY: 5
---------------------------------
------THIS IS CUSTOMER/0/-----
-1. ID_TABLE: 0
-2. ID_CUSTOMER: d
-3. CUSTOMER NAME: d
-4. CUSTOMER PHONENUMBER: d
-5. QUANTITY: 37
---------------------------------
+
 -----THIS IS CUSTOMER/6/-----
-1. ID_TABLE: 54
-2. ID_CUSTOMER: kien03
-3. CUSTOMER NAME: kien nguyen 
-4. CUSTOMER PHONENUMBER: 045932342
-5. QUANTITY: 5
---------------------------------
------THIS IS CUSTOMER/100/-----
 1. ID_TABLE: 5
-2. ID_CUSTOMER: 05
-3. CUSTOMER NAME: tran minh thu
-4. CUSTOMER PHONENUMBER: 0913444242
-5. QUANTITY: 2
---------------------------------
------THIS IS CUSTOMER/45/-----
-1. ID_TABLE: 34603536
-2. ID_CUSTOMER: 03
+2. ID_CUSTOMER: 012CUS
 3. CUSTOMER NAME: kiennguyen
 4. CUSTOMER PHONENUMBER: 0359111834
-5. QUANTITY: 4
---------------------------------
-
------THIS IS CUSTOMER/67/-----
-1. ID_TABLE: 89
-2. ID_CUSTOMER: 89iooo
-3. CUSTOMER NAME: yennhisocute
-4. CUSTOMER PHONENUMBER: 0359111834
-5. QUANTITY: 7
+5. QUANTITY: 6
 --------------------------------
